@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="home.css">
+</head>
+<body>
+    <h1>Users</h1>
+
+    <% users.forEach(function(user) { %>
+
+    <div class="profile-container">
+        <img src="/src/photos/<%= user.username %>/profile.jpeg" alt="Profile Picture of <%= user.username %>" class="profile-pic">
+
+        <h3 class="username"><%= user.username  %></h3>
+        
+        <form action="/images?username=<%=user.username%>" method="post" enctype="multipart/form-data" id="form-<%= user.username %>">
+            <input type="file" name="image" id="image" accept="image/*" onchange="submitForm('<%= user.username %>')" />
+        </form>
+        <a href="/feed?user=<%= user.username %>">View <%= user.username %>'s Feed</a>
+    </div>
+    <% }); %>
+    <script>
+
+        function submitForm(username) {
+            var form = document.getElementById('form-' + username);
+            form.submit();
+        }
+    </script>
+
+    
+
+</body>
+</html>
